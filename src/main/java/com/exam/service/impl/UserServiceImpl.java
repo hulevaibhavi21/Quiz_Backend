@@ -11,12 +11,13 @@ import com.exam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Set;
 
 @Service
+@CrossOrigin("*")
 public class UserServiceImpl implements UserService {
-
 
     @Autowired
     private UserRepository userRepository;
@@ -28,7 +29,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
 
-
         User local = this.userRepository.findByUsername(user.getUsername());
         if (local != null) {
             System.out.println("User is already there !!");
@@ -38,12 +38,10 @@ public class UserServiceImpl implements UserService {
             for (UserRole ur : userRoles) {
                 roleRepository.save(ur.getRole());
             }
-
             user.getUserRoles().addAll(userRoles);
             local = this.userRepository.save(user);
 
         }
-
         return local;
     }
 

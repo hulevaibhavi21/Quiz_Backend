@@ -100,4 +100,7 @@ public class Quiz {
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
+
+    public void setQid(long qid) {
+    }
 }

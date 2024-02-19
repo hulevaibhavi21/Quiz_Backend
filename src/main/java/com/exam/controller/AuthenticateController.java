@@ -32,9 +32,6 @@ public class AuthenticateController {
     @Autowired
     private JwtUtils jwtUtils;
 
-
-    //generate token
-
     @PostMapping("/generate-token")
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 
@@ -61,7 +58,6 @@ public class AuthenticateController {
     private void authenticate(String username, String password) throws Exception {
 
         try {
-
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
         } catch (DisabledException e) {
@@ -77,7 +73,5 @@ public class AuthenticateController {
         return ((User) this.userDetailsService.loadUserByUsername(principal.getName()));
 
     }
-
-
 
 }
